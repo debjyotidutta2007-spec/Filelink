@@ -45,18 +45,18 @@ def register_handlers(bot):
         # Force Sub Check
         if not await is_user_fsubbed(bot, user_id):
             return await event.respond(
-                "❌ **Access Denied!**\n\n"
-                "You must join our channels to use this bot.\n"
-                "Please join and then send /start again.",
-                buttons=[[Button.url("Join Channel", "https://t.me/cantarellabots")]]
+                "🔒 **Access Restricted**\n\n"
+                "Please join the required channel(s) configured by the bot owner, then send /start again.",
+                buttons=[[Button.inline("🔄 Check Again", b"check_sub")]]
             )
 
         await event.respond(
-            "👋 Welcome to CantarellaBots Media Streamer!\n\n"
-            "Send me any media file and I will generate a direct high-speed download/stream link for you.",
+            "👋 Welcome to NICKY Media Gateway!\n\n"
+            "📤 Send any media file and I’ll generate a fast direct link for download or online playback.\n\n"
+            "⚡ Simple • Fast • Reliable",
             buttons=[
-                [Button.url("Join Channel", "https://t.me/cantarellabots"), Button.url("Developer", "https://t.me/cantarella_wuwa")],
-                [Button.inline("Help", b"help"), Button.inline("About", b"about")]
+                [Button.inline("📖 Help", b"help"), Button.inline("ℹ️ About", b"about")],
+                [Button.inline("🔄 Refresh", b"check_sub")]
             ]
         )
 
@@ -74,9 +74,9 @@ def register_handlers(bot):
         # Force Sub Check
         if not await is_user_fsubbed(bot, event.sender_id):
             await event.reply(
-                "❌ **Access Denied!**\n\n"
-                "You must join our channels to use this bot.",
-                buttons=[[Button.url("Join Channel", "https://t.me/cantarellabots")]]
+                "🔒 **Access Restricted**\n\n"
+                "Please join the required channel(s), then try again.",
+                buttons=[[Button.inline("🔄 Check Again", b"check_sub")]]
             )
             return
 
@@ -154,27 +154,37 @@ def register_handlers(bot):
         await event.reply(
             caption,
             buttons=[
-                [Button.url("Download", download_url), Button.url("Watch Online", stream_url)],
-                [Button.inline("Delete Link", f"del_{short_code}".encode())]
+                [Button.url("⬇️ Download", download_url), Button.url("▶️ Watch Online", stream_url)],
+                [Button.inline("🗑️ Delete Link", f"del_{short_code}".encode())]
             ]
         )
 
     @bot.on(events.CallbackQuery())
     async def global_callback_check(event):
         if not await is_user_fsubbed(bot, event.sender_id):
-            return await event.answer("❌ You must join the channel first!", alert=True)
+            return await event.answer("❌ Please complete the required channel subscription first!", alert=True)
         
+    @bot.on(events.CallbackQuery(pattern=b'check_sub'))
+    async def check_sub_callback(event):
+        if await is_user_fsubbed(bot, event.sender_id):
+            await event.answer("✅ Access confirmed! Send a media file.", alert=True)
+        else:
+            await event.answer("❌ Subscription not detected yet.", alert=True)
+
     @bot.on(events.CallbackQuery(pattern=b'help'))
     async def help_callback(event):
-        await event.answer("Just send any file to get a direct link!", alert=True)
+        await event.answer("📤 Send a media file and NICKY will return download + watch links.", alert=True)
 
     @bot.on(events.CallbackQuery(pattern=b'about'))
     async def about_callback(event):
         await event.answer(
-            "🤖 CantarellaBots Media Streamer\n\n"
-            "This bot allows you to stream and download Telegram media at high speeds.\n\n"
-            "Channel: @cantarellabots\n"
-            "Developer: @cantarella_wuwa",
+            "⚡ NICKY Media Gateway\n\n"
+            "Fast direct links for Telegram media — download files or stream them online.\n\n"
+            "🚀 Direct delivery\n"
+            "🎬 Browser playback\n"
+            "🎧 Multi-audio support\n"
+            "🛡️ Lightweight gateway\n\n"
+            "Built & maintained by NICKY.",
             alert=True
         )
 
