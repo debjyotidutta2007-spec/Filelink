@@ -1,144 +1,169 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}TG Media Bot{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#070a12">
+    <title>{% block title %}NICKY • Media Gateway{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
-        
+        :root {
+            --bg: #070a12;
+            --panel: #0d1220;
+            --panel-2: #11182a;
+            --line: rgba(255,255,255,.09);
+            --text: #f7f9ff;
+            --muted: #8f9ab2;
+            --cyan: #4de7ff;
+            --lime: #b9ff66;
+            --pink: #ff5ca8;
+            --shadow: 0 24px 70px rgba(0,0,0,.42);
+            --radius: 22px;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             margin: 0;
-            padding: 0;
-            color: white;
-            font-family: 'Outfit', sans-serif;
             min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 15% 10%, rgba(77,231,255,.09), transparent 28%),
+                radial-gradient(circle at 85% 15%, rgba(255,92,168,.07), transparent 25%),
+                linear-gradient(145deg, #05070d 0%, #090d17 48%, #060810 100%);
+            font-family: 'Manrope', sans-serif;
             overflow-x: hidden;
-            background: #000;
         }
-
-        #bg-video {
+        body::before {
+            content: "";
             position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            filter: brightness(0.5);
-        }
-
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(10, 10, 20, 0.3) 0%, rgba(10, 10, 20, 0.7) 100%);
+            inset: 0;
+            pointer-events: none;
+            opacity: .34;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(to bottom, black, transparent 82%);
             z-index: -1;
         }
-
-        .watermark {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            opacity: 0.1;
-            font-size: 2rem;
-            font-weight: 800;
-            pointer-events: none;
-            z-index: 1000;
-            user-select: none;
-            text-transform: uppercase;
-            letter-spacing: 0.2rem;
-            transform: rotate(-15deg);
+        a { color: inherit; text-decoration: none; }
+        .site-shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
         }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        .brand { display:flex; align-items:center; gap:13px; }
+        .brand-mark {
+            width: 44px; height: 44px; border-radius: 14px;
+            display:grid; place-items:center;
+            color:#071016; font-size:18px;
+            background: linear-gradient(135deg, var(--cyan), var(--lime));
+            box-shadow: 0 0 35px rgba(77,231,255,.17);
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            transition: all 0.3s ease;
+        .brand-name { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:.12em; }
+        .brand-sub { display:block; margin-top:2px; color:var(--muted); font-size:10px; letter-spacing:.16em; text-transform:uppercase; }
+        .nav { display:flex; align-items:center; gap:8px; }
+        .nav a {
+            padding:10px 14px; border:1px solid transparent; border-radius:12px;
+            color:#aeb7ca; font-size:13px; font-weight:700; transition:.2s ease;
         }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
+        .nav a:hover { color:var(--text); background:#fff; border-color:var(--line); }
+        .nav .nav-cta {
+            color:#061014; background:var(--cyan); border-color:transparent;
         }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            transition: all 0.3s ease;
+        .nav .nav-cta:hover { color:#061014; background:var(--lime); transform:translateY(-1px); }
+        main { padding: 58px 0 20px; }
+        .eyebrow {
+            display:inline-flex; align-items:center; gap:8px; padding:7px 11px;
+            border:1px solid rgba(77,231,255,.2); border-radius:999px;
+            background:rgba(77,231,255,.055); color:#8ef0ff;
+            font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
         }
-
-        .btn-gradient:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        .eyebrow i { font-size:8px; }
+        .accent { color:var(--cyan); }
+        .gradient-text {
+            background:linear-gradient(100deg,var(--cyan),var(--lime));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
         }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .panel {
+            background:linear-gradient(145deg, rgba(17,24,42,.9), rgba(9,13,24,.9));
+            border:1px solid var(--line); border-radius:var(--radius);
+            box-shadow:var(--shadow);
+        }
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:9px;
+            min-height:46px; padding:0 18px; border-radius:13px;
+            border:1px solid var(--line); font-size:13px; font-weight:800;
+            transition:.22s ease; cursor:pointer;
+        }
+        .btn-primary { color:#061014; background:linear-gradient(135deg,var(--cyan),var(--lime)); border:0; }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(77,231,255,.14); }
+        .btn-ghost { background:#ffffff05; color:#dce4f4; }
+        .btn-ghost:hover { background:#ffffff0b; border-color:#ffffff1a; }
+        .tag {
+            display:inline-flex; align-items:center; gap:6px; padding:6px 9px;
+            border-radius:8px; background:#ffffff08; border:1px solid var(--line);
+            color:#aeb8cb; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+        }
+        footer { margin-top:75px; padding:30px 0 38px; border-top:1px solid var(--line); }
+        .footer-row { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+        .footer-brand { font-family:'Space Grotesk',sans-serif; font-weight:700; letter-spacing:.08em; }
+        .footer-note { color:#69748b; font-size:12px; line-height:1.6; }
+        .footer-links { display:flex; gap:16px; color:#8893a8; font-size:12px; }
+        .footer-links a:hover { color:var(--cyan); }
+        @media (max-width: 760px) {
+            .site-shell { width:min(100% - 22px, 1180px); }
+            .topbar { padding:16px 0; }
+            .nav a:not(.nav-cta) { display:none; }
+            .nav-cta { padding:9px 12px !important; }
+            main { padding-top:38px; }
+            .footer-row { flex-direction:column; align-items:flex-start; }
         }
     </style>
+    {% block head %}{% endblock %}
 </head>
-<body class="p-4 md:p-8">
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="/static/cantarella-smiles-at-you-wuthering-waves-moewalls-com.mp4" type="video/mp4">
-    </video>
-    <div class="bg-overlay"></div>
-    <div class="watermark">cantarellabots</div>
-    <nav class="max-w-6xl mx-auto flex justify-between items-center mb-12 glass p-4 rounded-2xl">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                <i class="fas fa-bolt"></i>
+<body>
+    <div class="site-shell">
+        <header class="topbar">
+            <a class="brand" href="/">
+                <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
+                <span>
+                    <span class="brand-name">NICKY</span>
+                    <span class="brand-sub">Media Gateway</span>
+                </span>
+            </a>
+            <nav class="nav" aria-label="Primary navigation">
+                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#features"><i class="fa-solid fa-layer-group"></i> Features</a>
+                <a href="/"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a class="nav-cta" href="/"><i class="fa-solid fa-arrow-right"></i> Open Gateway</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-row">
+                <div>
+                    <div class="footer-brand">NICKY <span class="accent">/</span> MEDIA GATEWAY</div>
+                    <div class="footer-note">Fast Telegram media delivery • Streaming • Direct links</div>
+                </div>
+                <div class="footer-links">
+                    <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="/"><i class="fa-solid fa-shield-halved"></i> Service</a>
+                    <a href="/"><i class="fa-solid fa-code"></i> Nicky</a>
+                </div>
             </div>
-            <span class="text-2xl font-bold tracking-tight">Cantarella<span class="text-indigo-500">Bots</span></span>
-        </div>
-        <div class="hidden md:flex space-x-8">
-            <a href="/" class="hover:text-indigo-400 transition">Home</a>
-            <a href="https://t.me/cantarellabots" target="_blank" class="hover:text-indigo-400 transition">Channel</a>
-            <a href="https://t.me/cantarella_wuwa" target="_blank" class="hover:text-indigo-400 transition">Developer</a>
-        </div>
-        <a href="https://t.me/cantarellabots" target="_blank" class="btn-gradient px-6 py-2 rounded-xl font-semibold">
-            Join Channel
-        </a>
-    </nav>
-
-    <main class="max-w-6xl mx-auto">
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer class="mt-20 py-12 border-t border-white/5 text-center">
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold mb-2">CantarellaBots</h2>
-            <p class="text-gray-500">High-performance media streaming and automation solutions.</p>
-        </div>
-        <div class="flex justify-center gap-6 mb-8">
-            <a href="https://t.me/cantarellabots" target="_blank" class="text-gray-400 hover:text-indigo-400 transition flex items-center gap-2">
-                <i class="fab fa-telegram"></i> Channel
-            </a>
-            <a href="https://t.me/cantarella_wuwa" target="_blank" class="text-gray-400 hover:text-indigo-400 transition flex items-center gap-2">
-                <i class="fas fa-code"></i> Developer
-            </a>
-        </div>
-        <p class="text-gray-600 text-sm">&copy; 2024 CantarellaBots. All rights reserved. Developed by @cantarella_wuwa</p>
-    </footer>
+        </footer>
+    </div>
 </body>
 </html>
