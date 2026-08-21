@@ -1,51 +1,156 @@
 {% extends "base.html" %}
 
-{% block title %}FastStream - Direct Media Link Generator{% endblock %}
+{% block title %}NICKY • Fast Media Gateway{% endblock %}
 
 {% block content %}
-<div class="text-center py-20">
-    <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-        Cantarella<span class="text-gradient">Bots</span> <br>
-        Media Streamer
-    </h1>
-    <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-        Experience ultra-high-speed Telegram media streaming without limits. 
-        Piped directly from Telegram using multi-session load balancing.
-    </p>
-    
-    <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-        <a href="https://t.me/cantarellabots" target="_blank" class="btn-gradient px-8 py-4 rounded-2xl font-bold text-lg flex items-center gap-2">
-            <i class="fab fa-telegram"></i> Join Our Channel
-        </a>
-        <a href="https://t.me/cantarella_wuwa" target="_blank" class="glass px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition">
-            Contact Developer
-        </a>
-    </div>
-</div>
+<section class="hero">
+    <div class="hero-copy">
+        <span class="eyebrow"><i class="fa-solid fa-circle"></i> Live media infrastructure</span>
+        <h1>Stream it.<br><span class="gradient-text">Send it.</span><br>Move on.</h1>
+        <p class="hero-text">
+            NICKY turns Telegram media into clean, fast direct links for downloading and online playback —
+            with a lightweight gateway built for speed.
+        </p>
 
-<div id="features" class="grid md:grid-cols-3 gap-8 mt-20">
-    <div class="glass-card p-8 text-center">
-        <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl mx-auto mb-6">
-            <i class="fas fa-rocket"></i>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#features"><i class="fa-solid fa-bolt"></i> Explore features</a>
+            <a class="btn btn-ghost" href="#workflow"><i class="fa-solid fa-arrow-down"></i> How it works</a>
         </div>
-        <h3 class="text-xl font-bold mb-4">Instant Generation</h3>
-        <p class="text-gray-400">Get direct links within seconds of sending your file to the bot.</p>
-    </div>
-    
-    <div class="glass-card p-8 text-center">
-        <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center text-purple-400 text-3xl mx-auto mb-6">
-            <i class="fas fa-play"></i>
+
+        <div class="mini-stats">
+            <div><strong>01</strong><span>Send media</span></div>
+            <div><strong>02</strong><span>Get a link</span></div>
+            <div><strong>03</strong><span>Watch anywhere</span></div>
         </div>
-        <h3 class="text-xl font-bold mb-4">Direct Streaming</h3>
-        <p class="text-gray-400">Watch your videos instantly with seeking support and multiple qualities.</p>
     </div>
-    
-    <div class="glass-card p-8 text-center">
-        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center text-green-400 text-3xl mx-auto mb-6">
-            <i class="fas fa-shield-alt"></i>
+
+    <div class="hero-console panel">
+        <div class="console-top">
+            <div>
+                <span class="console-kicker">NICKY / GATEWAY</span>
+                <h2>Media delivery console</h2>
+            </div>
+            <span class="live"><i class="fa-solid fa-circle"></i> ONLINE</span>
         </div>
-        <h3 class="text-xl font-bold mb-4">No Storage</h3>
-        <p class="text-gray-400">Files are piped directly from Telegram servers. We never store your data.</p>
+
+        <div class="signal">
+            <div class="signal-line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="signal-meta"><span>TELEGRAM INPUT</span><strong>READY</strong></div>
+        </div>
+
+        <div class="console-list">
+            <div><span class="icon cyan"><i class="fa-solid fa-cloud-arrow-up"></i></span><div><b>Direct ingest</b><small>Media stays on the Telegram pipeline</small></div><em>01</em></div>
+            <div><span class="icon lime"><i class="fa-solid fa-link"></i></span><div><b>Instant link</b><small>Generate a shareable direct endpoint</small></div><em>02</em></div>
+            <div><span class="icon pink"><i class="fa-solid fa-play"></i></span><div><b>Online playback</b><small>Browser and external player support</small></div><em>03</em></div>
+        </div>
     </div>
-</div>
+</section>
+
+<section id="features" class="section">
+    <div class="section-heading">
+        <span class="eyebrow">Built for everyday use</span>
+        <h2>Everything you need. <span class="accent">Nothing noisy.</span></h2>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature-card panel">
+            <div class="feature-icon cyan"><i class="fa-solid fa-gauge-high"></i></div>
+            <span class="feature-number">01</span>
+            <h3>Fast delivery</h3>
+            <p>Links are served through the streaming layer so media can start moving without unnecessary steps.</p>
+        </article>
+        <article class="feature-card panel">
+            <div class="feature-icon lime"><i class="fa-solid fa-film"></i></div>
+            <span class="feature-number">02</span>
+            <h3>Web playback</h3>
+            <p>Open a watch page with a modern player, metadata, sharing tools and external player shortcuts.</p>
+        </article>
+        <article class="feature-card panel">
+            <div class="feature-icon pink"><i class="fa-solid fa-language"></i></div>
+            <span class="feature-number">03</span>
+            <h3>Audio selection</h3>
+            <p>When multiple audio tracks are detected, choose the track you want directly from the watch page.</p>
+        </article>
+    </div>
+</section>
+
+<section id="workflow" class="workflow panel">
+    <div class="workflow-title">
+        <span class="eyebrow">Simple workflow</span>
+        <h2>From Telegram to playback.</h2>
+    </div>
+    <div class="workflow-steps">
+        <div><span>01</span><i class="fa-solid fa-paper-plane"></i><b>Send</b><small>Upload media to the bot</small></div>
+        <div><span>02</span><i class="fa-solid fa-wand-magic-sparkles"></i><b>Generate</b><small>Receive direct endpoints</small></div>
+        <div><span>03</span><i class="fa-solid fa-tv"></i><b>Play</b><small>Stream in browser or player</small></div>
+    </div>
+</section>
+
+<style>
+    .hero { display:grid; grid-template-columns:1.05fr .95fr; gap:55px; align-items:center; min-height:600px; }
+    .hero h1 { margin:22px 0 20px; font-family:'Space Grotesk',sans-serif; font-size:clamp(58px,8vw,104px); line-height:.86; letter-spacing:-.065em; }
+    .hero-text { max-width:620px; color:var(--muted); font-size:16px; line-height:1.85; }
+    .hero-actions { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
+    .mini-stats { display:flex; gap:28px; margin-top:46px; padding-top:20px; border-top:1px solid var(--line); }
+    .mini-stats div { display:flex; flex-direction:column; gap:3px; }
+    .mini-stats strong { font-family:'Space Grotesk'; font-size:19px; color:var(--cyan); }
+    .mini-stats span { color:#707b91; font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+    .hero-console { padding:25px; position:relative; overflow:hidden; }
+    .hero-console::after { content:""; position:absolute; width:190px; height:190px; right:-80px; top:-80px; border-radius:50%; background:rgba(77,231,255,.08); filter:blur(3px); }
+    .console-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; padding-bottom:22px; border-bottom:1px solid var(--line); }
+    .console-kicker { color:#6f7b93; font-size:9px; font-weight:800; letter-spacing:.18em; }
+    .console-top h2 { margin:7px 0 0; font-family:'Space Grotesk'; font-size:21px; }
+    .live { white-space:nowrap; color:var(--lime); font-size:10px; font-weight:800; letter-spacing:.12em; }
+    .live i { font-size:6px; vertical-align:2px; margin-right:5px; }
+    .signal { margin:24px 0; padding:18px; border:1px solid var(--line); border-radius:15px; background:#050810; }
+    .signal-line { height:55px; display:flex; align-items:center; gap:6px; }
+    .signal-line span { flex:1; border-radius:8px; background:linear-gradient(to top, rgba(77,231,255,.15), rgba(77,231,255,.8)); animation:pulse 1.8s ease-in-out infinite alternate; }
+    .signal-line span:nth-child(1){height:25%}.signal-line span:nth-child(2){height:60%}.signal-line span:nth-child(3){height:38%}.signal-line span:nth-child(4){height:86%}.signal-line span:nth-child(5){height:50%}.signal-line span:nth-child(6){height:72%}.signal-line span:nth-child(7){height:34%}.signal-line span:nth-child(8){height:64%}
+    .signal-line span:nth-child(2n){animation-delay:.3s}
+    .signal-meta { display:flex; justify-content:space-between; color:#5f6b82; font-size:9px; font-weight:800; letter-spacing:.1em; }
+    .signal-meta strong { color:var(--cyan); }
+    @keyframes pulse { to { opacity:.55; transform:scaleY(.75); } }
+    .console-list { display:grid; gap:8px; }
+    .console-list > div { display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:12px; padding:11px; border:1px solid transparent; border-radius:14px; transition:.2s; }
+    .console-list > div:hover { border-color:var(--line); background:#ffffff04; }
+    .console-list b { display:block; font-size:12px; }
+    .console-list small { display:block; margin-top:3px; color:#68748b; font-size:10px; }
+    .console-list em { color:#536077; font-style:normal; font-size:10px; font-weight:800; }
+    .icon, .feature-icon { display:grid; place-items:center; }
+    .icon { width:42px; height:42px; border-radius:12px; }
+    .cyan { color:var(--cyan); background:rgba(77,231,255,.08); }
+    .lime { color:var(--lime); background:rgba(185,255,102,.08); }
+    .pink { color:var(--pink); background:rgba(255,92,168,.08); }
+    .section { padding-top:90px; }
+    .section-heading { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:25px; }
+    .section-heading h2 { margin:0; font-family:'Space Grotesk'; font-size:clamp(30px,4vw,48px); letter-spacing:-.04em; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .feature-card { position:relative; padding:25px; min-height:235px; overflow:hidden; }
+    .feature-card:hover { transform:translateY(-4px); border-color:#ffffff17; }
+    .feature-icon { width:48px; height:48px; border-radius:14px; font-size:17px; margin-bottom:30px; }
+    .feature-number { position:absolute; top:23px; right:24px; color:#3c465a; font:700 11px 'Space Grotesk'; }
+    .feature-card h3 { margin:0 0 9px; font:700 21px 'Space Grotesk'; }
+    .feature-card p { margin:0; color:#78849a; font-size:12px; line-height:1.75; }
+    .workflow { margin-top:90px; padding:30px; display:grid; grid-template-columns:.8fr 1.5fr; gap:30px; align-items:center; }
+    .workflow-title h2 { margin:14px 0 0; font:700 32px 'Space Grotesk'; letter-spacing:-.04em; }
+    .workflow-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+    .workflow-steps > div { min-height:150px; padding:18px; background:#ffffff03; border:1px solid var(--line); border-radius:16px; position:relative; }
+    .workflow-steps span { position:absolute; top:12px; right:14px; color:#4d586c; font-size:9px; font-weight:800; }
+    .workflow-steps i { display:block; margin-bottom:25px; color:var(--cyan); font-size:18px; }
+    .workflow-steps b { display:block; font:700 15px 'Space Grotesk'; }
+    .workflow-steps small { display:block; margin-top:5px; color:#69758b; font-size:10px; line-height:1.5; }
+    @media (max-width:900px) {
+        .hero { grid-template-columns:1fr; min-height:auto; gap:35px; }
+        .feature-grid, .workflow { grid-template-columns:1fr; }
+        .workflow-steps { grid-template-columns:repeat(3,1fr); }
+        .section-heading { display:block; }
+        .section-heading h2 { margin-top:15px; }
+    }
+    @media (max-width:560px) {
+        .hero h1 { font-size:62px; }
+        .mini-stats { gap:15px; justify-content:space-between; }
+        .workflow-steps { grid-template-columns:1fr; }
+        .workflow-steps > div { min-height:auto; }
+    }
+</style>
 {% endblock %}
